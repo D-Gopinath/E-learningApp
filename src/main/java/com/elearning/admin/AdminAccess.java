@@ -54,25 +54,24 @@ public class AdminAccess {
 		do {
 		System.out.println("Select any Action \n 1.Display Users \n 2.Display Course \n 3.Add New Course \n 4.Delete Course \n 5.Exit");
 		int action = sc.nextInt();
-		switch(action) {
-		case 1:
+		if(action==1) {
 			UsersList();
-			break;
-		case 2:
+		}
+		else if(action==2){
 			c.displayAll();
-			break;
-		case 3:
+		}
+		else if(action==3){
 			insertCourse();
-			break;
-		case 4:
+		}
+		else if(action==4){
 			deleteCourse();
-			break;
-		case 5:
+		}
+		else if(action==5){
 			i=1;
 			System.exit(0);
-		default:
+		}
+		else{
 			System.err.println("Enter valid Option!!!");
-			break;
 		}
 		}while(i!=0);
 	}
