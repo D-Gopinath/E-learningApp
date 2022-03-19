@@ -58,15 +58,18 @@ public class Validation implements Validate {
 		
 	}
 
-	public static void checkLogin(ResultSet check,String password) throws Exception {
+	public static int checkLogin(ResultSet check,String password) throws Exception {
 		
 		String email=null;
 		String key=null;
+		int uid=0;
 		ResultSet data=check;
 		System.out.println("checking");
 		while(data.next()) {
+			uid=data.getInt("Uid");
 			email=data.getString("Email");
 			key=data.getString("password");
+			
 		}
 		if(email==null) {
 			throw new Exception("You are not Registered Yet!!!");
@@ -77,6 +80,7 @@ public class Validation implements Validate {
 		else {
 			throw new Exception("Email /Password is incorrect");
 		}
+		return uid;
 		
 	}
 

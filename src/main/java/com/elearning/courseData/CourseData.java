@@ -13,6 +13,6 @@ public class CourseData {
 		this.cDuration = cDuration;
 		this.cURL = cURL;
 		
-		System.out.println("CourseName"+cName +"Tutor"+cTutor+"Duration"+cDuration+"URL"+cURL);
+		//System.out.println("CourseName"+cName +"Tutor"+cTutor+"Duration"+cDuration+"URL"+cURL);
 	}
 }

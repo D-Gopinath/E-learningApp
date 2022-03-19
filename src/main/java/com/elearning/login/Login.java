@@ -15,8 +15,10 @@ public class Login {
 		String validEmail =ui.getEmail(); 
 		String validpass =ui.getPassword(); 
 		int  i = 0;
+		int uid=0;
 		try {
-			Validation.checkLogin(ElearningDAO.LoginData(validEmail), validpass);
+			uid=Validation.checkLogin(ElearningDAO.LoginData(validEmail), validpass);
+			System.out.println("Your User ID is : "+uid);
 		}
 		catch(Exception e) {
 			System.err.println(e.getMessage());
@@ -27,24 +29,30 @@ public class Login {
 			login();
 		}
 		
+		int j=0;
+		do {
 		System.out.println("\n Select Options \n 1.View Courses \n 2.Search \n 3.Enrolled Courses \n 4.Exit");
 		int option = sc.nextInt();
 		if(option == 1) {
-			c.displayAll();
+			c.displayAll(uid);
 		}
 		else if(option == 2) {
-			c.SearchCourse();
+			c.searchCourse(uid);
 		}
 		else if(option==3) {
-			                                               //yet to write
+			
+			c.enrolledCourse(uid);
+			                                               
 		}
 		else if(option==4) {
+			j=1;
 			System.out.println("Logging out...");
 			System.exit(0);
 		}
 		else {
 			System.out.println("Invalid option");
 		}
+		}while(j!=1);
 	}
 
 }

@@ -7,7 +7,7 @@ import com.elearning.courseData.CourseData;
 import com.elearning.courses.Courses;
 import com.elearning.dao.ElearningDAO;
 import com.elearning.sqlDB.SQLDB;
-class CourseDetails{
+class CourseDetails{           //Encapsulation is Used here...
 	
 	private String name;
 	private String tutor;
@@ -52,29 +52,28 @@ public class AdminAccess {
 		
 		int i=0;
 		do {
-		System.out.println("Select any Action \n 1.Display Users \n 2.Display Course \n 3.Add New Course \n 4.Delete Course \n 5.Exit");
+		System.out.println("\nSelect any Action \n 1.Display Users \n 2.Display Course \n 3.Add New Course \n 4.Delete Course \n 5.Exit");
 		int action = sc.nextInt();
-		switch(action) {
-		case 1:
+		if(action==1) {
 			UsersList();
-			break;
-		case 2:
-			c.displayAll();
-			break;
-		case 3:
+		}
+		else if(action==2) {
+			c.displayAll(1);
+		}
+		else  if(action== 3) {
 			insertCourse();
-			break;
-		case 4:
+		}
+		else if(action==4) {
 			deleteCourse();
-			break;
-		case 5:
+		}
+		else if(action==5) {
 			i=1;
 			System.exit(0);
-		default:
-			System.err.println("Enter valid Option!!!");
-			break;
 		}
-		}while(i!=0);
+		else {
+			System.err.println("Enter valid Option!!!");
+		}
+		}while(i!=1);
 	}
 	
 	public static void insertCourse()throws Exception{
@@ -110,10 +109,10 @@ public class AdminAccess {
 	
 	public static void UsersList() {
 		try {
-			String query = "select User_id,Name,Phone,Email from User_Registration";
+			String query = "select User_id,Name,Phone,Email from Users_Details";
 			ResultSet user = SQLDB.ConnectTable(query);
 			
-			System.out.println("\nUser_id\t\tName\t\tPhone\t\tEmail");
+			System.out.println("\nUser_id\tName\t\tPhone\t\tEmail");
 			
 			while(user.next()) {
 				int id = user.getInt("User_id");
@@ -121,7 +120,7 @@ public class AdminAccess {
 				String phone = user.getString("Phone");
 				String email = user.getString("Email");
 				
-				System.out.format("%d\t\t %s\t\t%s\t\t %s \n",id,name,phone,email);
+				System.out.format("%d\t %s\t\t%s\t\t %s \n",id,name,phone,email);
 				}
 		}
 		catch(Exception e) {
