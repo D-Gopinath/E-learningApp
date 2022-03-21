@@ -109,13 +109,13 @@ public class AdminAccess {
 	
 	public static void UsersList() {
 		try {
-			String query = "select User_id,Name,Phone,Email from Users_Details";
+			String query = "select Uid,Name,Phone,Email from Users_Details";
 			ResultSet user = SQLDB.ConnectTable(query);
 			
 			System.out.println("\nUser_id\tName\t\tPhone\t\tEmail");
 			
 			while(user.next()) {
-				int id = user.getInt("User_id");
+				int id = user.getInt("Uid");
 				String name = user.getString("Name");
 				String phone = user.getString("Phone");
 				String email = user.getString("Email");
@@ -124,7 +124,7 @@ public class AdminAccess {
 				}
 		}
 		catch(Exception e) {
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 	}
 
