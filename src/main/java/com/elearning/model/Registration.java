@@ -1,4 +1,4 @@
-package com.elearning.registration;
+package com.elearning.model;
 
 public class Registration {
 	public String name;

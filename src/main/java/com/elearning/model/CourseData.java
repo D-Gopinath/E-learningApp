@@ -1,4 +1,4 @@
-package com.elearning.courseData;
+package com.elearning.model;
 
 public class CourseData {
 	

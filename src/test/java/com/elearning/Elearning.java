@@ -5,14 +5,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.elearning.admin.*;
-import com.elearning.login.Login;
-import com.elearning.signup.*;
+import com.elearning.users.*;
 public class Elearning {
 	
 	private static Logger log = LogManager.getLogger(Elearning.class);
 
 	public static void main(String[] args) throws Exception {		
 		Scanner sc = new Scanner(System.in);
+		
 		SignUp su = new SignUp();
 		Login l = new Login();
 		Admin a = new Admin();
@@ -40,7 +40,7 @@ public class Elearning {
 				System.exit(0);
 			}
 			else {
-				log.error("Invalid Option");
+				log.warn("Invalid Option");
 				i=1;
 			}
 		}while(i==1);

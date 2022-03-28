@@ -3,10 +3,12 @@ package com.elearning.admin;
 import java.sql.ResultSet;
 import java.util.*;
 
-import com.elearning.courseData.CourseData;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.elearning.model.*;
 import com.elearning.courses.Courses;
-import com.elearning.dao.ElearningDAO;
-import com.elearning.sqlDB.SQLDB;
+import com.elearning.dao.*;
 class CourseDetails{           //Encapsulation is Used here...
 	
 	private String name;
@@ -48,11 +50,14 @@ public class AdminAccess {
 	Courses c = new Courses();
 	static Scanner sc = new Scanner(System.in);
 	static CourseDetails cd = new CourseDetails();
+	private static Logger log = LogManager.getLogger(AdminAccess.class);
 	public void adminActions() throws Exception {
+		
+		try {
 		
 		int i=0;
 		do {
-		System.out.println("\nSelect any Action \n 1.Display Users \n 2.Display Course \n 3.Add New Course \n 4.Delete Course \n 5.Exit");
+		log.info("\nSelect any Action \n 1.Display Users \n 2.Display Course \n 3.Add New Course \n 4.Delete Course \n 5.Display User's Course \n 6.Exit");
 		int action = sc.nextInt();
 		if(action==1) {
 			UsersList();
@@ -67,41 +72,52 @@ public class AdminAccess {
 			deleteCourse();
 		}
 		else if(action==5) {
+			UsersCourse();
+		}
+		else if(action==6) {
 			i=1;
 			System.exit(0);
 		}
 		else {
-			System.err.println("Enter valid Option!!!");
+			log.warn("Enter valid Option!!!");
 		}
 		}while(i!=1);
+		}
+		catch(Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 	
 	public static void insertCourse()throws Exception{
 		
-		System.out.println("Enter Course Name");
+		log.info("Enter Course Name");
 		String name = sc.next();
 		cd.setName(name);
 		
-		System.out.println("Enter Course Tutor");
+		log.info("Enter Course Tutor");
 		String tutor=sc.next();
 		cd.setTutor(tutor);
 		
-		System.out.println("Enter Course Duration");
+		log.info("Enter Course Duration");
 		String duration=sc.next();
 		cd.setDuration(duration);
 		
-		System.out.println("Enter Course URL");
+		log.info("Enter Course URL");
 		String url = sc.next();
 		cd.setURL(url);
 		
 		CourseData data = new CourseData(cd.getName(),cd.getTutor(),cd.getDuration(),cd.getURL());
-		
+		try {
 		dao.addCourse(data);
+		}
+		catch(Exception e) {
+			log.error("Course Already Exist!!!");
+		}
 		
 	}
 	
 	public static void deleteCourse() throws Exception{
-		System.out.println("Enter Course Name To Delete");
+		log.info("Enter Course Name To Delete");
 		String delete=sc.next();
 		cd.setName(delete);
 		dao.removeCourse(cd.getName());
@@ -124,8 +140,30 @@ public class AdminAccess {
 				}
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
+	}
+	public static void UsersCourse(){
+		
+		try {
+			String query = "select Users_Details.name,Course.C_Name from Users_Details inner join Course on Users_Details.C_id=Course.C_id ";
+			ResultSet user = SQLDB.ConnectTable(query);
+			
+			System.out.println("\nName\t\tCourse");
+			
+			while(user.next()) {
+				
+				String name = user.getString("Name");
+				String course = user.getString("C_Name");
+				
+				
+				System.out.format(" %s\t\t%s\n",name,course);
+				}
+		}
+		catch(Exception e) {
+			log.error(e.getMessage());
+		}
+		
 	}
 
 }

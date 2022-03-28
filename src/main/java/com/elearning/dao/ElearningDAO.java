@@ -1,13 +1,17 @@
 package com.elearning.dao;
 import java.util.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.ResultSet;
 
-import com.elearning.courseData.CourseData;
-import com.elearning.registration.*;
-import com.elearning.sqlDB.*;
+//import com.elearning.Elearning;
+import com.elearning.model.*;
 
 public class ElearningDAO {
 	static Scanner sc= new Scanner(System.in);
+	private static Logger log = LogManager.getLogger(ElearningDAO.class);
 	
 	public void Adduser(Registration add) throws Exception {
 		
@@ -32,21 +36,21 @@ public class ElearningDAO {
 		
 		String query = "insert into Course(C_Name,Tutor,Duration,URL) values('"+insert.cName+"','"+insert.cTutor+"','"+insert.cDuration+"','"+insert.cURL+"')";
 		SQLDB.sqlConnect(query);
-		System.out.println("New Course "+insert.cName+" is Added...");
+		log.info("New Course "+insert.cName+" is Added...");
 	}
 
 	public void removeCourse(String name) throws Exception{
 		
 		String query = "delete from Course where C_Name='"+name+"' ";
 		SQLDB.sqlConnect(query);
-		System.out.println(name+" is deleted");
+		log.info(name+" is deleted");
 	}
 	//Return the course id to the enrolledCourse method
 	public static int enrollCourse(char o,int uid) {
 		int i=0;
 		if(o=='Y' || o=='y') {
 			try {
-				System.out.println("Enter Course id to Enroll...");
+				log.info("Enter Course id to Enroll...");
 				i=sc.nextInt();
 				String q="select * from Course where C_id='"+i+"'";
 				ResultSet c = SQLDB.ConnectTable(q);
@@ -62,17 +66,17 @@ public class ElearningDAO {
 				}
 				String query ="update Users_Details set Course_Enrolled='"+cname+"',C_id='"+i+"',C_Tutor='"+ctutor+"',C_Duration='"+cduration+"',URL='"+url+"' where Uid='"+uid+"' ";
 				SQLDB.sqlConnect(query);
-				System.out.println(cname+" Successfully Enrolled!!!");
+				log.info(cname+" Successfully Enrolled!!!");
 			}
 			catch(Exception e){
-				  System.out.println(e.getMessage());  
+				  log.error(e.getMessage());  
 			}
 		}
 		else if(o=='N' || o=='n') {
 			
 		}
 		else {
-			System.out.println("Invalid Option");
+			log.warn("Invalid Option");
 		}
 		return i;
 	}

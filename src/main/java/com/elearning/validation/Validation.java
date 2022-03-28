@@ -1,6 +1,11 @@
 package com.elearning.validation;
 import java.sql.ResultSet;
 import java.util.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.elearning.courses.Courses;
 interface Validate{
 	String checkname(String name);
 	String checkphone(String phone);
@@ -10,11 +15,12 @@ interface Validate{
 public class Validation implements Validate { 
 	
 	Scanner sc = new Scanner(System.in); 
+	private static Logger log = LogManager.getLogger(Validation.class);
 	
 	public String checkname(String name) {
 		while(name.isBlank() || name.isEmpty()) {
-			System.err.println("Invalid name");
-			System.out.println("Enter Valid Name");
+			log.warn("Invalid name");
+			log.info("Enter Valid Name");
 			name=sc.nextLine();
 		}
 		return name;
@@ -22,15 +28,15 @@ public class Validation implements Validate {
 	
 	public String checkphone(String phone) {
 		while(phone.length()>10 || phone.length()<10) {
-			System.err.println("Invalid Number");
-			System.out.println("Enter Valid Number");
+			log.warn("Invalid Number");
+			log.info("Enter Valid Number");
 			phone=sc.nextLine();
 		}
 		for(int i=0;i<phone.length();i++) {
 				char ch=phone.charAt(i);
 				if(!Character.isDigit(ch)) {
-					System.err.println("Invalid number!!! Only numbers are allowed");
-					System.out.println("Enter mobile number:");
+					log.error("Invalid number!!! Only numbers are allowed");
+					log.info("Enter mobile number:");
 					phone=sc.nextLine();
 					checkphone(phone);
 				break;
@@ -41,8 +47,8 @@ public class Validation implements Validate {
 	
 	public String checkemail(String email) { 
 		while((!email.contains("@")) || (!email.endsWith(".com"))) {
-			System.err.println("Invalid Email");
-			System.out.println("Enter Valid Email");
+			log.warn("Invalid Email");
+			log.info("Enter Valid Email");
 			email=sc.nextLine();
 		}
 		return email;
@@ -50,8 +56,8 @@ public class Validation implements Validate {
 	
 	public String checkPassword(String password) { 
 		while(password.length()<8 || password.length()>16) {
-			System.err.println("Password Must contain 8-16 Characters");
-			System.out.println("Enter Valid Password");
+			log.warn("Password Must contain 8-16 Characters");
+			log.info("Enter Valid Password");
 			password=sc.nextLine();
 		}
 		return password;
@@ -64,7 +70,7 @@ public class Validation implements Validate {
 		String key=null;
 		int uid=0;
 		ResultSet data=check;
-		System.out.println("checking");
+		log.info("checking");
 		while(data.next()) {
 			uid=data.getInt("Uid");
 			email=data.getString("Email");
@@ -75,7 +81,7 @@ public class Validation implements Validate {
 			throw new Exception("You are not Registered Yet!!!");
 		}
 		else if(key.equals(password)) {
-			System.out.println("Loging in...  \n Welcome Back!");
+			log.info("Loging in...  \n Welcome Back!");
 		}
 		else {
 			throw new Exception("Email /Password is incorrect");
@@ -94,9 +100,10 @@ public class Validation implements Validate {
 			key=data.getString("password");
 		}
 		if(mailId.equals(email) && key.equals(password)) {
-			System.out.println("Access Granted....");
+			log.info("Access Granted....");
 		}
 		else {
+			log.error("Access Denied");
 			throw new Exception("Invaild Email/Password");
 		}
 		

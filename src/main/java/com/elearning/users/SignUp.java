@@ -1,10 +1,14 @@
-package com.elearning.signup;
+package com.elearning.users;
+
+//import com.eLearning.Elearning;
 import com.elearning.courses.*;
 import java.util.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.elearning.dao.ElearningDAO;
-import com.elearning.login.Login;
-import com.elearning.registration.Registration;
-import com.elearning.userinputs.UserInput;
+import com.elearning.model.*;
 
 public class SignUp { 
 	
@@ -12,6 +16,8 @@ public class SignUp {
 	Scanner sc = new Scanner(System.in);
 	Courses c = new Courses();
 	Login l = new Login();
+	
+	private static Logger log = LogManager.getLogger(SignUp.class);
 	
 	public void signup() throws Exception {
 		UserInput u =new UserInput();
@@ -28,10 +34,10 @@ public class SignUp {
 		
 		try {
 			dao.Adduser(register);
-			System.out.println("\n You are joined as New User \n\n Login To Expolre and Learn!!!");
+			log.info("\n You are joined as New User \n\n Login To Expolre and Learn!!!");
 			}
 		catch(Exception e) {
-				System.err.println("\n You are Existing USER!!!  \n Please Login!"); 
+				log.error("\n You are Existing USER!!!  \n Please Login!"); 
 			}
 		finally {
 			l.login();

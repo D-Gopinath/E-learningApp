@@ -1,13 +1,19 @@
-package com.elearning.userinputs;
+package com.elearning.users;
+import com.elearning.courses.Courses;
 import com.elearning.validation.*;
 import java.util.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 public class UserInput {
 	
 	Scanner sc = new Scanner(System.in);
 	Validation v = new Validation();
 	
+	private static Logger log = LogManager.getLogger(UserInput.class);
+	
 	public String getName() {
-		System.out.println("Enter Your FullName"); 
+		log.info("Enter Your FullName"); 
 		String fullname = sc.nextLine();
 		String validName = v.checkname(fullname);
 		return validName;
@@ -15,14 +21,14 @@ public class UserInput {
 	}
 	
 	public String getPhone() {
-		System.out.println("Enter Your Phone");
+		log.info("Enter Your Phone");
 		String phone = sc.nextLine(); 
 		String validPhone= v.checkphone(phone);
 		return validPhone;
 	}
 	
 	public String getEmail() {
-		System.out.println("Enter Your Email");
+		log.info("Enter Your Email");
 		String email =sc.nextLine();
 		String validEmail=v.checkemail(email);
 		return validEmail;
@@ -30,7 +36,7 @@ public class UserInput {
 	}
 	
 	public String getPassword() {
-		System.out.println("Enter Password");
+		log.info("Enter Password");
 		String password = sc.nextLine();
 		String validPass = v.checkPassword(password); 
 		return validPass;

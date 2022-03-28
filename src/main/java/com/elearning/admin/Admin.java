@@ -1,11 +1,18 @@
 package com.elearning.admin;
-import com.elearning.userinputs.*;
+import com.elearning.users.*;
 import com.elearning.validation.Validation;
 import java.util.Scanner;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.elearning.courses.Courses;
 import com.elearning.dao.*;
 
 public class Admin{
+	
+	private static Logger log = LogManager.getLogger(Admin.class);
+	
 	UserInput ui = new UserInput();
 	Courses c = new Courses();
 	Scanner sc = new Scanner(System.in);
@@ -19,7 +26,7 @@ public class Admin{
 			Validation.adminCheck(ElearningDAO.AdminLogin(),validEmail, validPass);
 		}
 		catch(Exception e) {
-			System.err.println(e.getMessage());
+			log.error(e.getMessage());
 		    i=1;
 		}
 		if(i==1) {
