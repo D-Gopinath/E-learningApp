@@ -62,6 +62,7 @@ public class AdminAccess {
 		if(action==1) {
 			UsersList();
 		}
+<<<<<<< HEAD
 		else if(action==2) {
 			c.displayAll(1);
 		}
@@ -77,6 +78,23 @@ public class AdminAccess {
 		else if(action==6) {
 			i=1;
 			System.exit(0);
+=======
+		else if(action==2){
+			c.displayAll();
+		}
+		else if(action==3){
+			insertCourse();
+		}
+		else if(action==4){
+			deleteCourse();
+		}
+		else if(action==5){
+			i=1;
+			System.exit(0);
+		}
+		else{
+			System.err.println("Enter valid Option!!!");
+>>>>>>> e844386c405e30739ebbf800f6a4d94e78b58165
 		}
 		else {
 			log.warn("Enter valid Option!!!");
