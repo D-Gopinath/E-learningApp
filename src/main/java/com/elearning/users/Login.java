@@ -23,7 +23,7 @@ public class Login {
 		int  i = 0;
 		int uid=0;
 		try {
-			uid=Validation.checkLogin(ElearningDAO.LoginData(validEmail), validpass);
+			uid=Validation.checkLogin(ElearningDAO.loginData(validEmail), validpass);
 			log.info("Your User ID is : "+uid);
 		}
 		catch(Exception e) {

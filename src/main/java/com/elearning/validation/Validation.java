@@ -7,9 +7,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.elearning.courses.Courses;
 interface Validate{
-	String checkname(String name);
-	String checkphone(String phone);
-	String checkemail(String email);
+	String checkName(String name);
+	String checkPhone(String phone);
+	String checkEmail(String email);
 	String checkPassword(String password);
 }
 public class Validation implements Validate { 
@@ -17,7 +17,7 @@ public class Validation implements Validate {
 	Scanner sc = new Scanner(System.in); 
 	private static Logger log = LogManager.getLogger(Validation.class);
 	
-	public String checkname(String name) {
+	public String checkName(String name) {
 		while(name.isBlank() || name.isEmpty()) {
 			log.warn("Invalid name");
 			log.info("Enter Valid Name");
@@ -26,8 +26,8 @@ public class Validation implements Validate {
 		return name;
 	}
 	
-	public String checkphone(String phone) {
-		while(phone.length()>10 || phone.length()<10) {
+	public String checkPhone(String phone) {
+		while(phone.length()!=10) {
 			log.warn("Invalid Number");
 			log.info("Enter Valid Number");
 			phone=sc.nextLine();
@@ -38,14 +38,14 @@ public class Validation implements Validate {
 					log.error("Invalid number!!! Only numbers are allowed");
 					log.info("Enter mobile number:");
 					phone=sc.nextLine();
-					checkphone(phone);
+					checkPhone(phone);
 				break;
 				}
 		}
 		return phone;
 	}
 	
-	public String checkemail(String email) { 
+	public String checkEmail(String email) { 
 		while((!email.contains("@")) || (!email.endsWith(".com"))) {
 			log.warn("Invalid Email");
 			log.info("Enter Valid Email");

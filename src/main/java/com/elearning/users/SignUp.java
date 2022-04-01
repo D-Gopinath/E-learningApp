@@ -33,7 +33,7 @@ public class SignUp {
 		Registration register = new Registration(name,phone,email,password);
 		
 		try {
-			dao.Adduser(register);
+			dao.addUser(register);
 			log.info("\n You are joined as New User \n\n Login To Expolre and Learn!!!");
 			}
 		catch(Exception e) {

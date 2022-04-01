@@ -13,19 +13,19 @@ public class ElearningDAO {
 	static Scanner sc= new Scanner(System.in);
 	private static Logger log = LogManager.getLogger(ElearningDAO.class);
 	
-	public void Adduser(Registration add) throws Exception {
+	public void addUser(Registration add) throws Exception {
 		
 		String query = "insert into Users_Details(name,phone,email,password) values('"+add.name+"','"+add.phone+"','"+add.email+"','"+add.password+"')";
 		SQLDB.sqlConnect(query);
 	}
 	
-	public static  ResultSet LoginData(String email) throws Exception{
+	public static  ResultSet loginData(String email) throws Exception{
 		String query="SELECT Uid,Email,password FROM Users_Details WHERE Email='"+email+"'";
 		ResultSet check=SQLDB.ConnectTable(query);
 		return check;	
 	}
 	
-	public static ResultSet AdminLogin() throws Exception {
+	public static ResultSet adminLogin() throws Exception {
 		String query = "select Email,Password from Users_Details WHERE Role ='Admin'";
 		ResultSet check =SQLDB.ConnectTable(query);
 		return check;

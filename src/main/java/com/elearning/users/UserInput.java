@@ -1,5 +1,4 @@
 package com.elearning.users;
-import com.elearning.courses.Courses;
 import com.elearning.validation.*;
 import java.util.*;
 
@@ -15,7 +14,7 @@ public class UserInput {
 	public String getName() {
 		log.info("Enter Your FullName"); 
 		String fullname = sc.nextLine();
-		String validName = v.checkname(fullname);
+		String validName = v.checkName(fullname);
 		return validName;
 		
 	}
@@ -23,14 +22,14 @@ public class UserInput {
 	public String getPhone() {
 		log.info("Enter Your Phone");
 		String phone = sc.nextLine(); 
-		String validPhone= v.checkphone(phone);
+		String validPhone= v.checkPhone(phone);
 		return validPhone;
 	}
 	
 	public String getEmail() {
 		log.info("Enter Your Email");
 		String email =sc.nextLine();
-		String validEmail=v.checkemail(email);
+		String validEmail=v.checkEmail(email);
 		return validEmail;
 		
 	}

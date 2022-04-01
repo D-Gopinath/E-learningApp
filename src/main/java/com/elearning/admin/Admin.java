@@ -23,7 +23,7 @@ public class Admin{
 		int i =0;
 		
 		try {
-			Validation.adminCheck(ElearningDAO.AdminLogin(),validEmail, validPass);
+			Validation.adminCheck(ElearningDAO.adminLogin(),validEmail, validPass);
 		}
 		catch(Exception e) {
 			log.error(e.getMessage());

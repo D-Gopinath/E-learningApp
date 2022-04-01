@@ -20,7 +20,7 @@ public class Courses {
 	public void displayAll(int uid) throws Exception {
 		
 		try {
-		String query ="select * from Course";
+		String query ="select C_ID,C_NAME,Tutor,Duration from Course";
 		ResultSet course = SQLDB.ConnectTable(query);
 		System.out.println("\nID \t\t Name \t\t Tutor \t\t Duration");
 		while(course.next()) {
@@ -47,7 +47,7 @@ public class Courses {
 		log.info("Enter Course to Search...");
 		String cname = sc.next();
 		try {                                                                            
-			String query = "select * from Course WHERE C_NAME ='"+cname+"' ";
+			String query = "select C_ID,C_NAME,Tutor,Duration from Course WHERE C_NAME ='"+cname+"' ";
 			ResultSet course = SQLDB.ConnectTable(query);
 			System.out.println("\nID \t\t Name \t\t Tutor \t\t Duration");
 			if(course.next()) {
