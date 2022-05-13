@@ -1,4 +1,4 @@
-Project Title: E-Learning App
+Project Title: E-Learning App - CORE JAVA
 
 E-Learning Application is mostly used by students and working professionals to
 learn new technologies. This platform provides variety of courses in different categories.
